@@ -1,5 +1,5 @@
 import './assets/view.css'
-import Event from './event'
+import Event from './event.js'
 
 class View {
   constructor() {

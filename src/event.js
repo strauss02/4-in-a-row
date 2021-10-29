@@ -12,6 +12,7 @@ class Event {
     this.listeners.push(listener)
   }
 
+  //this method is called upon when we wish to trigger an action by the event, with a parameter.
   trigger(params) {
     this.listeners.forEach((listener) => listener(params))
   }
