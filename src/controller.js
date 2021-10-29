@@ -8,4 +8,10 @@ class Controller {
 
     //bind data from dom (view) to actions from model
   }
+
+  run() {
+    this.view.render()
+  }
 }
+
+export default Controller
