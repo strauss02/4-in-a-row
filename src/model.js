@@ -22,7 +22,7 @@ class FourInARow {
     this.updateCellEvent.trigger({ move, player: this.currentPlayer })
 
     //???
-    this.finished = this.victoryEvent() || this.draw()
+    this.finished = this.victory() || this.draw()
 
     // if the game is not decided yet, move on to the next turn.
     if (!this.finished) {

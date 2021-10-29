@@ -1,4 +1,4 @@
-import './assets/view.css'
+// import './assets/view.css'
 import Event from './event.js'
 
 class View {
@@ -21,7 +21,7 @@ class View {
           this.playEvent.trigger(i)
         })
 
-        board.appendChild('cell')
+        board.appendChild(cell)
 
         return cell
       })
@@ -34,7 +34,7 @@ class View {
   }
 
   updateCell(data) {
-    this.cells[data.move].innerHTML = data.player
+    this.cells[data.move].classList.add(`${data.player}-cell`)
   }
 
   victory(winner) {
