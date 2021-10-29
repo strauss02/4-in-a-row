@@ -1,8 +1,9 @@
 import './assets/view.css'
+import Event from './event'
 
 class View {
   constructor() {
-    // this.playEvent =
+    this.playEvent = new Event()
   }
 
   render() {
@@ -10,21 +11,38 @@ class View {
     board.className = 'board'
     //create a board element
 
-    //render = {
-    //create board cells elements:
-    //forEach, add event listener on cells that listens for clicks that will trigger a play event
-    //append cells to board
-    //
+    this.cells = Array(42)
+      .fill()
+      .map((_, i) => {
+        const cell = document.createElement('div')
+        cell.className = 'cell'
 
-    //create a message element
-    //append message and board to document
-    //}
+        cell.addEventListener('click', () => {
+          this.playEvent.trigger(i)
+        })
 
-    //updatecell(data) = assign player color to a cell according to data
+        board.appendChild('cell')
 
-    // victory(winner) =  change message content to display winner
+        return cell
+      })
 
-    // draw() = chane message to display draw
+    this.message = document.createElement('div')
+    this.message.className = 'message'
+
+    document.body.appendChild(board)
+    document.body.appendChild(this.message)
+  }
+
+  updateCell(data) {
+    this.cells[data.move].innerHTML = data.player
+  }
+
+  victory(winner) {
+    this.message.innerHTML(`the winner is ${winner}!`)
+  }
+
+  draw() {
+    this.message.innerHTML(`it's a draw!`)
   }
 }
 
