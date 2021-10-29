@@ -24,8 +24,47 @@ class FourInARow {
     //???
     this.finished = this.victoryEvent() || this.draw()
 
+    // if the game is not decided yet, move on to the next turn.
     if (!this.finished) {
       this.switchPlayer()
     }
   }
+
+  // check if any of the players won by comparing it to an array of possible combos. returns true or false
+  victory() {
+    // this array contains all winning combos
+    const lineCombos = [[1, 2, 3, 4]]
+
+    // a constant that checks wether the board has any combos. returns true or false.
+    const victory = lineCombos.some((combo) => {
+      this.board[combo[0]] &&
+        this.board[combo[0]] === this.board[combo[1]] &&
+        this.board[combo[1]] === this.board[combo[2]]
+    })
+
+    if (victory) {
+      this.victoryEvent.trigger(this.currentPlayer)
+    }
+
+    return victory
+  }
+
+  //checks if the game is tied, triggers draw event if so. returns boolean
+  draw() {
+    // checks if each and every cell is filled
+    const draw = this.board.every((i) => i)
+
+    if (draw) {
+      this.drawEvent.trigger()
+    }
+
+    return draw
+  }
+
+  //passes the currentplayer field to the next player, by checking who is currently the player
+  switchPlayer() {
+    this.currentPlayer = this.currentPlayer === 'red' ? 'yellow' : 'red'
+  }
 }
+
+export default FourInARow
