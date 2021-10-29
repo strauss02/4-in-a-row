@@ -61,6 +61,16 @@ class FourInARow {
     return draw
   }
 
+  scanForVictory() {
+    /*
+        directions = {
+            wide: [[R,Y,R,R,Y,R,R][YR,R,RY,]]
+            longs: []
+        }
+      for each direction
+      */
+  }
+
   //passes the currentplayer field to the next player, by checking who is currently the player
   switchPlayer() {
     this.currentPlayer = this.currentPlayer === 'red' ? 'yellow' : 'red'
