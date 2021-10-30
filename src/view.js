@@ -38,11 +38,13 @@ class View {
   }
 
   victory(winner) {
-    this.message.innerHTML(`the winner is ${winner}!`)
+    console.log(`reached view`)
+
+    this.message.innerHTML = `the winner is ${winner}!`
   }
 
   draw() {
-    this.message.innerHTML(`it's a draw!`)
+    this.message.innerHTML = `it's a draw!`
   }
 }
 

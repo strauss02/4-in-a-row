@@ -21,32 +21,34 @@ class FourInARow {
     // ???
     this.updateCellEvent.trigger({ move, player: this.currentPlayer })
 
-    //???
+    // is the game finished? that will be determined by if any of the following returns true - did victory happen? did draw happen?
     this.finished = this.victory() || this.draw()
 
     // if the game is not decided yet, move on to the next turn.
     if (!this.finished) {
       this.switchPlayer()
     }
+
+    console.log(this.board)
   }
 
   // check if any of the players won by comparing it to an array of possible combos. returns true or false
   victory() {
+    this.scanForVictory()
+
     // this array contains all winning combos
-    const lineCombos = [[1, 2, 3, 4]]
+    // const lineCombos = [[1, 2, 3, 4]]
 
     // a constant that checks wether the board has any combos. returns true or false.
-    const victory = lineCombos.some((combo) => {
-      this.board[combo[0]] &&
-        this.board[combo[0]] === this.board[combo[1]] &&
-        this.board[combo[1]] === this.board[combo[2]]
-    })
+    // const victory = lineCombos.some((combo) => {
+    //   this.board[combo[0]] &&
+    //     this.board[combo[0]] === this.board[combo[1]] &&
+    //     this.board[combo[1]] === this.board[combo[2]]
+    // })
 
-    if (victory) {
-      this.victoryEvent.trigger(this.currentPlayer)
-    }
+    // }
 
-    return victory
+    // return victory
   }
 
   //checks if the game is tied, triggers draw event if so. returns boolean
@@ -61,7 +63,51 @@ class FourInARow {
     return draw
   }
 
-  scanForVictory() {}
+  //board is an array that represents the cells in a single dimensional,linear fashion
+  scanForVictory() {
+    this.board.forEach((cellContent, cellIndex) => {
+      if (cellContent) {
+        //if the cell isn't empty...
+        if (
+          this.board[cellIndex] === cellContent &&
+          this.board[cellIndex + 1] === cellContent &&
+          this.board[cellIndex + 2] === cellContent &&
+          this.board[cellIndex + 3] === cellContent
+        ) {
+          console.log('wide victory!')
+          this.victoryEvent.trigger(this.currentPlayer)
+          return true
+        } else if (
+          this.board[cellIndex] === cellContent &&
+          this.board[cellIndex + 7] === cellContent &&
+          this.board[cellIndex + 14] === cellContent &&
+          this.board[cellIndex + 21] === cellContent
+        ) {
+          console.log('long victory!')
+          this.victoryEvent.trigger(this.currentPlayer)
+          return true
+        } else if (
+          this.board[cellIndex] === cellContent &&
+          this.board[cellIndex + 6] === cellContent &&
+          this.board[cellIndex + 12] === cellContent &&
+          this.board[cellIndex + 18] === cellContent
+        ) {
+          console.log('south west diagonal victory!')
+          this.victoryEvent.trigger(this.currentPlayer)
+          return true
+        } else if (
+          this.board[cellIndex] === cellContent &&
+          this.board[cellIndex + 8] === cellContent &&
+          this.board[cellIndex + 16] === cellContent &&
+          this.board[cellIndex + 24] === cellContent
+        ) {
+          console.log('north east diagonal victory!')
+          this.victoryEvent.trigger(this.currentPlayer)
+          return true
+        }
+      }
+    })
+  }
 
   //passes the currentplayer field to the next player, by checking who is currently the player
   switchPlayer() {
