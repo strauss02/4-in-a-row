@@ -12,14 +12,16 @@ class FourInARow {
   }
   play(columnIndex) {
     //check to see if the game is finished, or the cell to columnIndex to is invalid.
-    if (
-      this.finished ||
-      columnIndex < 0 ||
-      columnIndex > 49 ||
-      this.board[columnIndex]
-    ) {
-      return false
-    }
+    /**================= I commented this out temporarily======== */
+    // if (
+    //   this.finished ||
+    //   columnIndex < 0 ||
+    //   columnIndex > 49 ||
+    //   this.board[columnIndex]
+    // ) {
+    //   return false
+    // }
+    /**========================================================= */
     const columnElement = document.getElementById(`column ${columnIndex}`)
     const lowestCell = this.findLowestCell(columnElement)
     console.log(lowestCell)
@@ -110,7 +112,7 @@ class FourInARow {
   }
 
   findLowestCell(column) {
-    const cells = [...column.children]
+    const cells = [...column.children].reverse()
     let lowestCell = cells.find(checkCell)
     console.log(lowestCell)
     return lowestCell
