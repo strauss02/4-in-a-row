@@ -55,8 +55,14 @@ class View {
   }
 
   updateCell(data) {
-    this.cells[data.move].classList.add(`${data.player}-cell`)
-    this.cells[data.move].setAttribute('color', `${data.player}`)
+    const cell = this.cells[data.move]
+    cell.classList.add(`${data.player}-cell`)
+    cell.setAttribute('color', `${data.player}`)
+    // const stuntCell = cell.cloneNode(false)
+    // stuntCell.removeAttribute('id')
+    // stuntCell.classList.add('stunt-cell')
+    // stuntCell.style.position = 'absolute'
+    // cell.parentElement.appendChild(stuntCell)
   }
 
   victory(winner) {

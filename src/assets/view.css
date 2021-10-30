@@ -1,6 +1,7 @@
 body {
   font-family: Helvetica, Arial, sans-serif;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -43,6 +44,23 @@ body {
 
 .yellow-cell {
   background-color: rgb(255, 230, 0);
+}
+
+.yellow-cell,
+.red-cell {
+  animation-name: bounce;
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.98, 1.66, 0.09, 0.68);
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-1000px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .message {
