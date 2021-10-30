@@ -13,14 +13,14 @@ class FourInARow {
   play(columnIndex) {
     //check to see if the game is finished, or the cell to columnIndex to is invalid.
     /**================= I commented this out temporarily======== */
-    // if (
-    //   this.finished ||
-    //   columnIndex < 0 ||
-    //   columnIndex > 49 ||
-    //   this.board[columnIndex]
-    // ) {
-    //   return false
-    // }
+    if (
+      this.finished
+      //   columnIndex < 0 ||
+      //   columnIndex > 49 ||
+      //   this.board[columnIndex]
+    ) {
+      return false
+    }
     /**========================================================= */
     const columnElement = document.getElementById(`column ${columnIndex}`)
     const lowestCell = this.findLowestCell(columnElement)
@@ -63,9 +63,12 @@ class FourInARow {
   //board is an array that represents the cells in a single dimensional,linear fashion
   scanForVictory() {
     this.board.forEach((cellContent, cellIndex) => {
+      const cellElement = getCellElement(`${cellIndex}`)
+
       if (cellContent) {
         //if the cell isn't empty...
         if (
+          cellElement.getAttribute('column') < 4 && //prevent sequence by differnet rows
           this.board[cellIndex] === cellContent &&
           this.board[cellIndex + 1] === cellContent &&
           this.board[cellIndex + 2] === cellContent &&
@@ -93,6 +96,8 @@ class FourInARow {
           this.victoryEvent.trigger(this.currentPlayer)
           return true
         } else if (
+          getCellElement(cellIndex).getAttribute('column') < 3 &&
+          getCellElement(cellIndex).getAttribute('row') < 3 &&
           this.board[cellIndex] === cellContent &&
           this.board[cellIndex + 8] === cellContent &&
           this.board[cellIndex + 16] === cellContent &&
@@ -121,6 +126,10 @@ class FourInARow {
 
 function checkCell(cell) {
   return !cell.hasAttribute('color')
+}
+
+function getCellElement(cellIndex) {
+  return document.getElementById(`${cellIndex}`)
 }
 
 export default FourInARow

@@ -29,8 +29,8 @@ class View {
         const cell = document.createElement('div')
         cell.className = 'cell'
         cell.id = `${i}`
-        cell.classList.add(`column-${i % 7}`)
-        cell.classList.add(`row-${Math.floor(i / 7)}`)
+        cell.setAttribute('column', `${i % 7}`)
+        cell.setAttribute('row', `${Math.floor(i / 7)}`)
         console.log(cell)
 
         //clicking on a cell will trigger the playEvent, that will go
