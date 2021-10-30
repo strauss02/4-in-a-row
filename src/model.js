@@ -35,20 +35,6 @@ class FourInARow {
   // check if any of the players won by comparing it to an array of possible combos. returns true or false
   victory() {
     this.scanForVictory()
-
-    // this array contains all winning combos
-    // const lineCombos = [[1, 2, 3, 4]]
-
-    // a constant that checks wether the board has any combos. returns true or false.
-    // const victory = lineCombos.some((combo) => {
-    //   this.board[combo[0]] &&
-    //     this.board[combo[0]] === this.board[combo[1]] &&
-    //     this.board[combo[1]] === this.board[combo[2]]
-    // })
-
-    // }
-
-    // return victory
   }
 
   //checks if the game is tied, triggers draw event if so. returns boolean

@@ -10,18 +10,28 @@ class View {
     const board = document.createElement('div')
     board.className = 'board'
     //create a board element
+    for (let i = 0; i < 7; i++) {
+      const column = document.createElement('div')
+      column.id = `column ${i}`
+      column.className = 'column'
+      board.append(column)
+      document.body.appendChild(board)
+    }
+
+    console.log(document.getElementById(`column 1`))
 
     this.cells = Array(49)
       .fill()
       .map((_, i) => {
         const cell = document.createElement('div')
         cell.className = 'cell'
+        cell.classList.add(`column-${i % 7}`)
 
         cell.addEventListener('click', () => {
           this.playEvent.trigger(i)
         })
 
-        board.appendChild(cell)
+        document.getElementById(`column ${i % 7}`).append(cell)
 
         return cell
       })
@@ -29,8 +39,10 @@ class View {
     this.message = document.createElement('div')
     this.message.className = 'message'
 
-    document.body.appendChild(board)
+    // document.body.appendChild(board)
     document.body.appendChild(this.message)
+
+    this.divideToColumns()
   }
 
   updateCell(data) {
@@ -50,6 +62,14 @@ class View {
 
   renderUnclickable(element) {
     element.style.pointerEvents = 'none'
+  }
+
+  divideToColumns() {
+    const elements = document.querySelectorAll('.column-0')
+    const column = document.createElement('div')
+    column.className = 'column-container'
+    column.append(elements)
+    console.log('divided')
   }
 }
 
