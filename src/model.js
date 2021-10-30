@@ -10,16 +10,25 @@ class FourInARow {
     this.victoryEvent = new Event()
     this.drawEvent = new Event()
   }
-  play(move) {
-    //check to see if the game is finished, or the cell to move to is invalid.
-    if (this.finished || move < 0 || move > 49 || this.board[move]) {
+  play(columnIndex) {
+    //check to see if the game is finished, or the cell to columnIndex to is invalid.
+    if (
+      this.finished ||
+      columnIndex < 0 ||
+      columnIndex > 49 ||
+      this.board[columnIndex]
+    ) {
       return false
     }
+    const columnElement = document.getElementById(`column ${columnIndex}`)
+    const lowestCell = this.findLowestCell(columnElement)
+    console.log(lowestCell)
+    const cellId = lowestCell.id
     // assign player color to the cell
-    this.board[move] = this.currentPlayer
+    this.board[cellId] = this.currentPlayer
 
     // ???
-    this.updateCellEvent.trigger({ move, player: this.currentPlayer })
+    this.updateCellEvent.trigger({ move: cellId, player: this.currentPlayer })
 
     // is the game finished? that will be determined by if any of the following returns true - did victory happen? did draw happen?
     this.finished = this.victory() || this.draw()
@@ -99,6 +108,17 @@ class FourInARow {
   switchPlayer() {
     this.currentPlayer = this.currentPlayer === 'red' ? 'yellow' : 'red'
   }
+
+  findLowestCell(column) {
+    const cells = [...column.children]
+    let lowestCell = cells.find(checkCell)
+    console.log(lowestCell)
+    return lowestCell
+  }
+}
+
+function checkCell(cell) {
+  return cell.innerHTML === ''
 }
 
 export default FourInARow

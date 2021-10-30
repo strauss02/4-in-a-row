@@ -14,6 +14,9 @@ class View {
       const column = document.createElement('div')
       column.id = `column ${i}`
       column.className = 'column'
+      column.addEventListener('click', () => {
+        this.playEvent.trigger(i) //clicking a column will trigger playEvent with the column index as param
+      })
       board.append(column)
       document.body.appendChild(board)
     }
@@ -25,13 +28,19 @@ class View {
       .map((_, i) => {
         const cell = document.createElement('div')
         cell.className = 'cell'
+        cell.id = `${i}`
         cell.classList.add(`column-${i % 7}`)
+        cell.classList.add(`row-${Math.floor(i / 7)}`)
+        console.log(cell)
 
-        cell.addEventListener('click', () => {
-          this.playEvent.trigger(i)
-        })
+        //clicking on a cell will trigger the playEvent, that will go
+        //through the controller to trigger the 'play()' method in the
+        //model, with param `i`, index of the cell
+        // cell.addEventListener('click', () => {
+        //   this.playEvent.trigger(i)
+        // })
 
-        document.getElementById(`column ${i % 7}`).append(cell)
+        document.getElementById(`column ${i % 7}`).prepend(cell)
 
         return cell
       })
