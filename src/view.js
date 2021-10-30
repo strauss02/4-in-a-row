@@ -11,7 +11,7 @@ class View {
     board.className = 'board'
     //create a board element
 
-    this.cells = Array(42)
+    this.cells = Array(49)
       .fill()
       .map((_, i) => {
         const cell = document.createElement('div')

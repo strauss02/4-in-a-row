@@ -2,7 +2,7 @@ import Event from './event.js'
 
 class FourInARow {
   constructor() {
-    this.board = Array(42).fill()
+    this.board = Array(49).fill()
     this.currentPlayer = 'red'
     this.finished = false
 
@@ -12,7 +12,7 @@ class FourInARow {
   }
   play(move) {
     //check to see if the game is finished, or the cell to move to is invalid.
-    if (this.finished || move < 0 || move > 42 || this.board[move]) {
+    if (this.finished || move < 0 || move > 49 || this.board[move]) {
       return false
     }
     // assign player color to the cell
@@ -61,15 +61,7 @@ class FourInARow {
     return draw
   }
 
-  scanForVictory() {
-    /*
-        directions = {
-            wide: [[R,Y,R,R,Y,R,R][YR,R,RY,]]
-            longs: []
-        }
-      for each direction
-      */
-  }
+  scanForVictory() {}
 
   //passes the currentplayer field to the next player, by checking who is currently the player
   switchPlayer() {
