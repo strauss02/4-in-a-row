@@ -118,7 +118,7 @@ class FourInARow {
 }
 
 function checkCell(cell) {
-  return cell.innerHTML === ''
+  return !cell.hasAttribute('color')
 }
 
 export default FourInARow

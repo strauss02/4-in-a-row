@@ -56,6 +56,7 @@ class View {
 
   updateCell(data) {
     this.cells[data.move].classList.add(`${data.player}-cell`)
+    this.cells[data.move].setAttribute('color', `${data.player}`)
   }
 
   victory(winner) {
