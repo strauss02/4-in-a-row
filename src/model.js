@@ -78,6 +78,7 @@ class FourInARow {
           this.victoryEvent.trigger(this.currentPlayer)
           return true
         } else if (
+          cellElement.getAttribute('row') < 4 &&
           this.board[cellIndex] === cellContent &&
           this.board[cellIndex + 7] === cellContent &&
           this.board[cellIndex + 14] === cellContent &&
@@ -87,12 +88,14 @@ class FourInARow {
           this.victoryEvent.trigger(this.currentPlayer)
           return true
         } else if (
+          getCellElement(cellIndex).getAttribute('column') > 2 &&
+          getCellElement(cellIndex).getAttribute('row') < 4 &&
           this.board[cellIndex] === cellContent &&
           this.board[cellIndex + 6] === cellContent &&
           this.board[cellIndex + 12] === cellContent &&
           this.board[cellIndex + 18] === cellContent
         ) {
-          console.log('south west diagonal victory!')
+          console.log('south east diagonal victory!')
           this.victoryEvent.trigger(this.currentPlayer)
           return true
         } else if (
