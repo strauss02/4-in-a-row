@@ -39,12 +39,17 @@ class View {
 
   victory(winner) {
     console.log(`reached view`)
-
+    const board = document.querySelector('.board')
+    this.renderUnclickable(board)
     this.message.innerHTML = `the winner is ${winner}!`
   }
 
   draw() {
     this.message.innerHTML = `it's a draw!`
+  }
+
+  renderUnclickable(element) {
+    element.style.pointerEvents = 'none'
   }
 }
 

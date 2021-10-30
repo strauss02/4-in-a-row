@@ -15,6 +15,7 @@ class Controller {
     })
 
     this.model.victoryEvent.addListener((winner) => {
+      console.log(`reached Controller`)
       this.view.victory(winner)
     })
 
