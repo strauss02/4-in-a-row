@@ -4,6 +4,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: rgb(235, 223, 186);
 }
 
 .board {
@@ -19,7 +20,7 @@ body {
 
 .cell {
   border: 8px solid rgb(7, 92, 172);
-  background-color: aliceblue;
+  background-color: rgb(235, 223, 186);
   border-radius: 50%;
   display: flex;
   justify-content: center;

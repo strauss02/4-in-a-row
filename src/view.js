@@ -74,6 +74,7 @@ class View {
 
   draw() {
     this.message.innerHTML = `it's a draw!`
+    this.renderUnclickable(board)
   }
 
   renderUnclickable(element) {
