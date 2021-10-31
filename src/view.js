@@ -7,15 +7,16 @@ class View {
   }
 
   render() {
+    //create a board element
     const board = document.createElement('div')
     board.className = 'board'
-    //create a board element
+
     for (let i = 0; i < 7; i++) {
       const column = document.createElement('div')
       column.id = `column ${i}`
       column.className = 'column'
       column.addEventListener('click', () => {
-        this.playEvent.trigger(i) //clicking a column will trigger playEvent with the column index as param
+        this.playEvent.trigger(document.getElementById(`column ${i}`))
       })
       board.append(column)
       document.body.appendChild(board)
@@ -33,13 +34,6 @@ class View {
         cell.setAttribute('row', `${Math.floor(i / 7)}`)
         console.log(cell)
 
-        //clicking on a cell will trigger the playEvent, that will go
-        //through the controller to trigger the 'play()' method in the
-        //model, with param `i`, index of the cell
-        // cell.addEventListener('click', () => {
-        //   this.playEvent.trigger(i)
-        // })
-
         document.getElementById(`column ${i % 7}`).prepend(cell)
 
         return cell
@@ -48,7 +42,6 @@ class View {
     this.message = document.createElement('div')
     this.message.className = 'message'
 
-    // document.body.appendChild(board)
     document.body.appendChild(this.message)
 
     this.divideToColumns()
@@ -58,11 +51,6 @@ class View {
     const cell = this.cells[data.move]
     cell.classList.add(`${data.player}-cell`)
     cell.setAttribute('color', `${data.player}`)
-    // const stuntCell = cell.cloneNode(false)
-    // stuntCell.removeAttribute('id')
-    // stuntCell.classList.add('stunt-cell')
-    // stuntCell.style.position = 'absolute'
-    // cell.parentElement.appendChild(stuntCell)
   }
 
   victory(winner) {
@@ -87,6 +75,10 @@ class View {
     column.className = 'column-container'
     column.append(elements)
     console.log('divided')
+  }
+
+  getCellByIndex(index) {
+    return document.getElementById(`${index}`)
   }
 }
 

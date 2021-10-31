@@ -1,3 +1,4 @@
+import Controller from './controller.js'
 import Event from './event.js'
 
 class FourInARow {
@@ -10,14 +11,11 @@ class FourInARow {
     this.victoryEvent = new Event()
     this.drawEvent = new Event()
   }
-  play(columnIndex) {
+  play(columnElement) {
     if (this.finished) {
       return false
     }
-
-    const columnElement = document.getElementById(`column ${columnIndex}`)
-    const lowestCell = this.findLowestCell(columnElement)
-    const cellId = lowestCell.id
+    const cellId = this.findLowestCell(columnElement).id
 
     // assign player color to the cell
     this.board[cellId] = this.currentPlayer
@@ -34,21 +32,6 @@ class FourInARow {
   }
 
   victory() {
-    this.scanForVictory()
-  }
-
-  draw() {
-    // checks if each and every cell is filled
-    const draw = this.board.every((i) => i)
-
-    if (draw) {
-      this.drawEvent.trigger()
-    }
-
-    return draw
-  }
-
-  scanForVictory() {
     this.board.forEach((cellContent, cellIndex) => {
       const cellElement = this.getCellElement(`${cellIndex}`)
 
@@ -101,11 +84,23 @@ class FourInARow {
     })
   }
 
+  draw() {
+    // checks if each and every cell is filled
+    const draw = this.board.every((i) => i)
+
+    if (draw) {
+      this.drawEvent.trigger()
+    }
+
+    return draw
+  }
+
   switchPlayer() {
     this.currentPlayer = this.currentPlayer === 'red' ? 'yellow' : 'red'
   }
 
   findLowestCell(column) {
+    console.log(column)
     const cells = [...column.children].reverse()
     let lowestCell = cells.find(this.checkCell)
     return lowestCell

@@ -15,14 +15,16 @@ class Controller {
     })
 
     this.model.victoryEvent.addListener((winner) => {
-      console.log(`reached Controller`)
       this.view.victory(winner)
     })
 
     this.model.drawEvent.addListener(() => {
       this.view.draw()
     })
-    //bind data from dom (view) to actions from model
+  }
+
+  getCellByIndex(index) {
+    this.view.getCellByIndex(index)
   }
 
   run() {
